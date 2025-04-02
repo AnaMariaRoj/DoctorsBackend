@@ -16,23 +16,23 @@ def read_practitioners_from_mongodb(collection):
         practitioners = collection.find()
         
         # Convertir los documentos a una lista de diccionarios
-        doctor_list = list(practitioners)
+        practitioner_list = list(practitioners)
         
         # Retornar la lista de doctores
-        return doctor_list
+        return practitioner_list
     except Exception as e:
         print(f"Error al leer desde MongoDB: {e}")
         return None
 
 # Función para mostrar los datos de los doctores
-def display_practitioners(doctor_list):
-    if doctor_list:
-        for doctor in doctor_list:
+def display_practitioners(practitioner_list):
+    if practitioner_list:
+        for practitioner in practitioner_list:
             print("Doctor:")
-            print(f"  ID: {doctor.get('_id')}")
-            print(f"  Nombre: {doctor.get('name', [{}])[0].get('given', [''])[0]} {doctor.get('name', [{}])[0].get('family', '')}")
-            print(f"  Especialidad: {doctor.get('specialty', 'No especificada')}")
-            print(f"  Género: {doctor.get('gender', 'Desconocido')}")
+            print(f"  ID: {practitioner.get('_id')}")
+            print(f"  Nombre: {practitioner.get('name', [{}])[0].get('given', [''])[0]} {practitioner.get('name', [{}])[0].get('family', '')}")
+            print(f"  Especialidad: {practitioner.get('specialty', 'No especificada')}")
+            print(f"  Género: {practitioner                                                                                                                             .get('gender', 'Desconocido')}")
             print("-" * 30)
     else:
         print("No se encontraron doctores en la base de datos.")

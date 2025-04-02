@@ -4,7 +4,7 @@ import json
 # Ejemplo de uso
 if __name__ == "__main__":
     # JSON string correspondiente al artefacto Practitioner de HL7 FHIR
-    doctor_json = '''
+    practitioner_json = '''
     {
       "resourceType": "Practitioner",
       "identifier": [
@@ -73,5 +73,5 @@ if __name__ == "__main__":
     }
     '''
 
-    doc = Practitioner.model_validate(json.loads(doctor_json))
+    doc = Practitioner.model_validate(json.loads(practitioner_json))
     print("JSON::", doc.model_dump())
