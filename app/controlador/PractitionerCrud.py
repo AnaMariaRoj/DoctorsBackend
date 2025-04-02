@@ -20,11 +20,12 @@ def WritePractitioner(practitioner_dict: dict):
     try:
         pra = Practitioner.model_validate(practitioner_dict)
     except Exception as e:
-        return f"errorValidating: {str(e)}",None
+        print(f"Error de validación: {str(e)}") 
+        return f"errorValidating: {str(e)}", None
     validated_practitioner_json = pra.model_dump()
-    result = collection.insert_one(practitioner_dict)
-    if result:
-        inserted_id = str(result.inserted_id)
-        return "success",inserted_id
-    else:
+    try:
+        result = collection.insert_one(validated_practitioner_json)
+        return "success", str(result.inserted_id)
+    except Exception as e:
+        print(f"Error al insertar en MongoDB: {str(e)}") 
         return "errorInserting", None
