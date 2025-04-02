@@ -41,3 +41,16 @@ def DeleteDoctor(doctor_id: str):
     except Exception as e:
         return "error", str(e)
 
+def WriteDoctor(doctor_dict: dict):
+    try:
+        pat = Doctor.model_validate(doctor_dict)
+    except Exception as e:
+        return f"errorValidating: {str(e)}",None
+    validated_doctor_json = pat.model_dump()
+    result = collection.insert_one(docotr_dict)
+    if result:
+        inserted_id = str(result.inserted_id)
+        return "success",inserted_id
+    else:
+        return "errorInserting", None
+

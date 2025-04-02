@@ -9,7 +9,7 @@ def connect_to_mongodb(uri, db_name, collection_name):
     collection = db[collection_name]
     return collection
 
-# Función para guardar el JSON en MongoDB
+# Función para guardar en MongoDB
 def save_practitioner_to_mongodb(practitioner_json, collection):
     try:
         # Convertir el JSON string a un diccionario de Python
