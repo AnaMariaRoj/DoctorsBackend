@@ -10,13 +10,13 @@ def connect_to_mongodb(uri, db_name, collection_name):
     return collection
 
 # Función para leer todos los doctores de la colección
-def read_doctors_from_mongodb(collection):
+def read_practitioners_from_mongodb(collection):
     try:
         # Consultar todos los documentos en la colección
-        doctors = collection.find()
+        practitioners = collection.find()
         
         # Convertir los documentos a una lista de diccionarios
-        doctor_list = list(doctors)
+        doctor_list = list(practitioners)
         
         # Retornar la lista de doctores
         return doctor_list
@@ -25,7 +25,7 @@ def read_doctors_from_mongodb(collection):
         return None
 
 # Función para mostrar los datos de los doctores
-def display_doctors(doctor_list):
+def display_practitioners(doctor_list):
     if doctor_list:
         for doctor in doctor_list:
             print("Doctor:")
@@ -50,7 +50,7 @@ if __name__ == "__main__":
     collection = connect_to_mongodb(uri, db_name, collection_name)
     
     # Leer los doctores de la colección
-    doctors = read_doctors_from_mongodb(collection)
+    practitioners = read_practitioners_from_mongodb(collection)
     
     # Mostrar los datos de los doctores
-    display_doctors(doctors)
+    display_practitioners(practitioners)

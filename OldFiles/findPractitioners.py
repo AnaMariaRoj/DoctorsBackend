@@ -8,8 +8,8 @@ def connect_to_mongodb(uri, db_name, collection_name):
     collection = db[collection_name]
     return collection
 
-# Función para buscar doctores por un identifier específico
-def find_doctor_by_identifier(collection, identifier_type, identifier_value):
+# Función para buscar practitionerses por un identifier específico
+def find_practitioners_by_identifier(collection, identifier_type, identifier_value):
     try:
         # Consultar el documento que coincida con el identifier
         query = {
@@ -20,27 +20,27 @@ def find_doctor_by_identifier(collection, identifier_type, identifier_value):
                 }
             }
         }
-        doctor = collection.find_one(query)
+        practitioners = collection.find_one(query)
         
-        # Retornar el doctor encontrado
-        return doctor
+        # Retornar el practitioners encontrado
+        return practitioners
     except Exception as e:
         print(f"Error al buscar en MongoDB: {e}")
         return None
 
-# Función para mostrar los datos de un doctor
-def display_doctor(doctor):
-    if doctor:
-        print("Doctor encontrado:")
-        print(f"  ID: {doctor.get('_id')}")
-        print(f"  Nombre: {doctor.get('name', [{}])[0].get('given', [''])[0]} {doctor.get('name', [{}])[0].get('family', '')}")
-        print(f"  Género: {doctor.get('gender', 'Desconocido')}")
-        print(f"  Especialidad: {doctor.get('specialty', 'No especificada')}")
+# Función para mostrar los datos de un practitioners
+def display_practitioners(practitioners):
+    if practitioners:
+        print("practitioners encontrado:")
+        print(f"  ID: {practitioners.get('_id')}")
+        print(f"  Nombre: {practitioners.get('name', [{}])[0].get('given', [''])[0]} {practitioners.get('name', [{}])[0].get('family', '')}")
+        print(f"  Género: {practitioners.get('gender', 'Desconocido')}")
+        print(f"  Especialidad: {practitioners.get('specialty', 'No especificada')}")
         print("  Identificadores:")
-        for identifier in doctor.get("identifier", []):
+        for identifier in practitioners.get("identifier", []):
             print(f"    Type: {identifier.get('type')}, Valor: {identifier.get('value')}")
     else:
-        print("No se encontró ningún doctor con el identifier especificado.")
+        print("No se encontró ningún practitioners con el identifier especificado.")
 
 # Ejemplo de uso
 if __name__ == "__main__":
@@ -58,8 +58,8 @@ if __name__ == "__main__":
     identifier_type = "cc"
     identifier_value = "1020713756"
     
-    # Buscar el doctor por identifier
-    doctor = find_doctor_by_identifier(collection, identifier_type, identifier_value)
+    # Buscar el practitioners por identifier
+    practitioners = find_practitioners_by_identifier(collection, identifier_type, identifier_value)
     
-    # Mostrar los datos del doctor encontrado
-    display_doctor(doctor)
+    # Mostrar los datos del practitioners encontrado
+    display_practitioners(practitioners)
